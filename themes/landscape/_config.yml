@@ -1,0 +1,10 @@
+menu:
+  Home: /
+  Archives: /archives/
+
+hero:
+  eyebrow: Independent Blog
+  title: Notes, builds, and internet fragments.
+  description: A design-forward Hexo blog for essays, experiments, and ongoing work.
+  primary_cta: Explore Posts
+  secondary_cta: View Archive

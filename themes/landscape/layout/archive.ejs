@@ -1,0 +1,19 @@
+<section class="archive-view">
+  <div class="section-heading">
+    <p class="eyebrow">Archive</p>
+    <h1><%= page.title || 'All posts' %></h1>
+  </div>
+
+  <div class="archive-list">
+    <% page.posts.each(function(post, index){ %>
+      <article class="archive-item">
+        <span class="archive-item__index"><%= String(index + 1).padStart(2, '0') %></span>
+        <div class="archive-item__content">
+          <h2><a href="<%= url_for(post.path) %>"><%= post.title %></a></h2>
+          <p><%= truncate(strip_html(post.excerpt || post.content || ''), {length: 160}) %></p>
+        </div>
+        <time datetime="<%= date_xml(post.date) %>"><%= date(post.date, 'YYYY.MM.DD') %></time>
+      </article>
+    <% }) %>
+  </div>
+</section>

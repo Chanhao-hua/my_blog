@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="<%= config.language || 'zh-CN' %>">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= page.title ? page.title + ' | ' + config.title : config.title %></title>
+  <meta name="description" content="<%= page.excerpt ? strip_html(page.excerpt).slice(0, 140) : config.description %>">
+  <%- feed_tag('atom.xml') %>
+  <%- css('css/style.css') %>
+  <meta name="generator" content="Hexo">
+</head>
+<body class="<%= page.layout || 'page' %>">
+  <div class="site-shell">
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <header class="site-header">
+      <a class="site-mark" href="<%= url_for('/') %>">
+        <span class="site-mark__index">01</span>
+        <span class="site-mark__text"><%= config.title %></span>
+      </a>
+
+      <nav class="site-nav" aria-label="Main navigation">
+        <% for (const label in theme.menu) { %>
+          <a href="<%= url_for(theme.menu[label]) %>"><%= label %></a>
+        <% } %>
+      </nav>
+    </header>
+
+    <main class="page-frame">
+      <%- body %>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <p class="site-footer__label">Based in the open web</p>
+        <p class="site-footer__meta"><%= config.author %> · <%= config.language || 'zh-CN' %></p>
+      </div>
+      <div>
+        <p class="site-footer__label">Publishing stack</p>
+        <p class="site-footer__meta">Hexo · GitHub · Netlify · Cloudflare</p>
+      </div>
+    </footer>
+  </div>
+
+  <%- js('js/main.js') %>
+</body>
+</html>

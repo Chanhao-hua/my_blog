@@ -1,0 +1,20 @@
+<article class="article-view">
+  <div class="article-view__header">
+    <p class="eyebrow">Journal entry</p>
+    <h1><%= page.title %></h1>
+    <div class="article-view__meta">
+      <time datetime="<%= date_xml(page.date) %>"><%= date(page.date, 'YYYY.MM.DD') %></time>
+      <% if (page.updated && page.updated.valueOf() !== page.date.valueOf()) { %>
+        <span>Updated <%= date(page.updated, 'YYYY.MM.DD') %></span>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="article-view__body">
+    <%- page.content %>
+  </div>
+
+  <div class="article-view__back">
+    <a class="button button--ghost" href="<%= url_for('/') %>">Back to home</a>
+  </div>
+</article>

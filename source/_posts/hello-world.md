@@ -1,38 +1,33 @@
 ---
-title: Hello World
+title: Designing a calmer blog front page
+date: 2026-01-12 18:29:36
+categories:
+  - Design
+tags:
+  - hexo
+  - editorial
+excerpt: Reworking a default Hexo homepage into a quieter editorial layout with mixed language typography, fixed-side scrolling, and curated cover panels.
+cover: editorial-grid
 ---
-Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
+This note records the first meaningful redesign of the blog homepage.
 
-## Quick Start
+Instead of starting with a giant hero block, I wanted the front page to feel more like a magazine index: quieter, denser, and more intentional. The goal was not to imitate an award-site layout one-to-one, but to borrow its editorial confidence and spatial rhythm.
 
-### Create a new post
+## Direction
 
-``` bash
-$ hexo new "My New Post"
-```
+- Keep the title smaller and calmer.
+- Mix Chinese and English in a natural way.
+- Use cover-like panels instead of a single dominant banner.
+- Let the reading list scroll while the filter area stays fixed.
 
-More info: [Writing](https://hexo.io/docs/writing.html)
+## What changed
 
-### Run server
+The homepage now opens with `chen's blog`, a short bilingual introduction, and a cover section that acts like a visual table of contents. Below that, the layout shifts into a split-screen reading index: the left side explains the page and holds the filters, while the right side becomes the main stream of articles.
 
-``` bash
-$ hexo server
-```
+## Why it feels better
 
-More info: [Server](https://hexo.io/docs/server.html)
+Many default blog themes are usable but too generic. &#26356;&#32534;&#36753;&#21270;&#30340;&#24067;&#23616; makes even a small set of posts feel chosen instead of merely listed.
 
-### Generate static files
+## Next
 
-``` bash
-$ hexo generate
-```
-
-More info: [Generating](https://hexo.io/docs/generating.html)
-
-### Deploy to remote sites
-
-``` bash
-$ hexo deploy
-```
-
-More info: [Deployment](https://hexo.io/docs/one-command-deployment.html)
+The next step is to add real cover images, richer post metadata, and a stronger archive structure so the site can keep this mood as content grows.

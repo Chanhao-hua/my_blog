@@ -1,10 +1,10 @@
 menu:
-  Home: /
-  Archives: /archives/
+  首页: /
+  归档: /archives/
 
 hero:
-  eyebrow: Independent Blog
-  title: Notes, builds, and internet fragments.
-  description: A design-forward Hexo blog for essays, experiments, and ongoing work.
-  primary_cta: Explore Posts
-  secondary_cta: View Archive
+  eyebrow: 个人博客
+  title: 笔记、项目与网络碎片
+  description: 一个偏设计感的 Hexo 博客，用来记录文章、实验和进行中的想法。
+  primary_cta: 浏览文章
+  secondary_cta: 查看归档

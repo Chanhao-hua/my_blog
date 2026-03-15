@@ -1,36 +1,36 @@
 ---
-title: Build notes for Hexo, Netlify, and Cloudflare
+title: Hexo、Netlify 与 Cloudflare 部署笔记
 date: 2026-01-12 18:43:56
 categories:
-  - Development
+  - 开发
 tags:
-  - deployment
-  - netlify
-  - cloudflare
-excerpt: A compact deployment checklist for keeping a Hexo blog stable across GitHub, Netlify builds, and Cloudflare caching.
+  - 部署
+  - Netlify
+  - Cloudflare
+excerpt: 一份简洁的部署检查清单，用来保证 Hexo 博客在 GitHub、Netlify 与 Cloudflare 之间稳定运行。
 cover: signal-lines
 ---
 
-This post is a short operational note for the current blog stack.
+这篇文章是一份针对当前博客技术栈的简短运维记录。
 
-## Stack
+## 技术栈
 
-- Source hosted on GitHub
-- Static site generation with Hexo
-- Build and deploy with Netlify
-- Domestic acceleration and caching through Cloudflare
+- 源码托管在 GitHub
+- 使用 Hexo 生成静态站点
+- 通过 Netlify 构建与发布
+- 使用 Cloudflare 做访问加速与缓存
 
-## Common failure points
+## 常见故障点
 
-The most annoying issue is the false blank page: build output exists, but an old asset path, stale cache, or broken theme reference leaves the browser rendering almost nothing useful.
+最让人困扰的问题通常是假性白屏：构建产物其实已经存在，但旧资源路径、缓存残留或者主题引用错误，会让浏览器看起来像“什么都没加载”。
 
-## Practical checklist
+## 实用检查清单
 
-- Make sure Netlify publishes from the `public` directory.
-- Run a clean build when changing theme templates.
-- Avoid depending on theme files that only live in `node_modules`.
-- Purge Cloudflare cache after major front-end changes.
+- 确认 Netlify 发布目录指向 `public`
+- 修改主题模板后执行一次完整 clean build
+- 不要依赖只存在于 `node_modules` 里的主题文件
+- 发生较大前端改动后清理 Cloudflare 缓存
 
-## Closing note
+## 结语
 
-The stack is simple enough to maintain, but only if the theme lives in the repo and the generated output stays deterministic.
+这套栈本身并不复杂，但前提是主题文件要真正落在仓库里，并且生成结果保持稳定可控。

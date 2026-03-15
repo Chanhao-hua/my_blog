@@ -14,11 +14,11 @@ function categoryItems(post) {
     });
   }
   if (!items.length) {
-    items.push({ name: 'Uncategorized', slug: 'uncategorized' });
+    items.push({ name: '未分类', slug: 'uncategorized' });
   }
   return items;
 }
-var filters = [{ label: 'All', slug: 'all' }];
+var filters = [{ label: '全部', slug: 'all' }];
 var seenFilters = { all: true };
 posts.each(function(post) {
   categoryItems(post).forEach(function(category) {
@@ -37,24 +37,24 @@ function coverName(post) {
 
 <section class="masthead">
   <div class="masthead__title">
-    <p class="eyebrow">chen's notebook / personal dispatches</p>
+    <p class="eyebrow">chen 的笔记 / 个人记录</p>
     <h1>chen's blog</h1>
   </div>
   <div class="masthead__copy">
-    <p class="lede">Notes on &#35774;&#35745;, &#24320;&#21457;, observations, and unfinished ideas, arranged like an editorial index instead of a default blog splash.</p>
-    <p class="subcopy">A quieter front page with mixed language rhythm, image-like cover blocks, and a scrolling reading index.</p>
+    <p class="lede">关于设计、开发、观察和未完成想法的记录，让首页更像一本编辑型目录，而不是普通博客封面。</p>
+    <p class="subcopy">用更安静的排版节奏、封面式模块和滚动阅读索引来组织内容。</p>
   </div>
 </section>
 
 <section class="cover-grid">
   <article class="cover-card cover-card--intro">
-    <p class="cover-card__kicker">Editorial Note</p>
-    <h2>Less hero, more mood.</h2>
-    <p>The opening screen avoids a giant hero and moves closer to a portfolio cover and an independent magazine front page, with a touch of &#20013;&#33521;&#28151;&#25490;.</p>
+    <p class="cover-card__kicker">编辑说明</p>
+    <h2>减少大横幅，保留氛围感。</h2>
+    <p>首屏不再使用夸张的大 Hero，而是更接近作品封面与独立杂志首页的组织方式，并保留一点中英混排的节奏感。</p>
   </article>
 
   <article class="cover-card cover-card--featured">
-    <p class="cover-card__kicker">Latest Cover</p>
+    <p class="cover-card__kicker">最新封面</p>
     <% if (featuredPost) { %>
       <div class="cover-art cover-art--<%= coverName(featuredPost) %>"></div>
       <h2><a href="<%= url_for(featuredPost.path) %>"><%= featuredPost.title %></a></h2>
@@ -64,25 +64,25 @@ function coverName(post) {
         <span><%= categoryItems(featuredPost)[0].name %></span>
       </div>
     <% } else { %>
-      <h2>Awaiting first entry</h2>
-      <p>Publish your first post and this area will automatically become the live cover of the site.</p>
+      <h2>等待第一篇文章</h2>
+      <p>发布你的第一篇文章后，这里会自动成为网站首页的动态封面区域。</p>
     <% } %>
   </article>
 
   <article class="cover-card cover-card--stack">
-    <p class="cover-card__kicker">Site Frame</p>
+    <p class="cover-card__kicker">站点概览</p>
     <div class="mini-stack">
       <div>
-        <span class="mini-stack__label">Archive begins</span>
-        <strong><%= site.posts.length ? date(site.posts.first().date, 'YYYY') : 'Now' %></strong>
+        <span class="mini-stack__label">归档开始于</span>
+        <strong><%= site.posts.length ? date(site.posts.first().date, 'YYYY') : '现在' %></strong>
       </div>
       <div>
-        <span class="mini-stack__label">Entries</span>
+        <span class="mini-stack__label">文章数量</span>
         <strong><%= site.posts.length %></strong>
       </div>
       <div>
-        <span class="mini-stack__label">Next read</span>
-        <strong><%= secondaryPost ? secondaryPost.title : 'Coming soon' %></strong>
+        <span class="mini-stack__label">下一篇推荐</span>
+        <strong><%= secondaryPost ? secondaryPost.title : '即将更新' %></strong>
       </div>
     </div>
   </article>
@@ -91,20 +91,20 @@ function coverName(post) {
 <section class="split-section" id="posts">
   <aside class="split-section__sidebar">
     <div class="sticky-panel">
-      <p class="eyebrow">Scroll index</p>
-      <h2>Selected writing / &#20998;&#31867;&#31679;&#36873;</h2>
-      <p class="sticky-panel__copy">The left rail stays pinned while the right side keeps moving. Filter the list in place and keep the reading flow uninterrupted.</p>
-      <div class="filter-row" aria-label="Category filters">
+      <p class="eyebrow">滚动索引</p>
+      <h2>精选文章 / 分类筛选</h2>
+      <p class="sticky-panel__copy">左侧保持固定，右侧持续滚动浏览文章。你可以在当前页面直接筛选分类，而不会打断阅读节奏。</p>
+      <div class="filter-row" aria-label="分类筛选">
         <% filters.forEach(function(filter) { %>
           <button class="filter-chip<%= filter.slug === 'all' ? ' is-active' : '' %>" type="button" data-filter="<%= filter.slug %>"><%= filter.label %></button>
         <% }) %>
       </div>
-      <a class="button button--ghost" href="<%= url_for('/archives/') %>">Browse archive</a>
+      <a class="button button--ghost" href="<%= url_for('/archives/') %>">查看归档</a>
     </div>
   </aside>
 
   <div class="split-section__content">
-    <% posts.each(function(post, index) { 
+    <% posts.each(function(post, index) {
       var categories = categoryItems(post);
       var categorySlugs = categories.map(function(category) { return category.slug; }).join(' ');
     %>
@@ -124,7 +124,7 @@ function coverName(post) {
             </div>
           </div>
           <p><%= truncate(strip_html(post.excerpt || post.content || ''), {length: 180}) %></p>
-          <a class="post-card__link" href="<%= url_for(post.path) %>">Open article</a>
+          <a class="post-card__link" href="<%= url_for(post.path) %>">阅读全文</a>
         </div>
       </article>
     <% }) %>

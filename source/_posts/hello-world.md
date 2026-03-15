@@ -1,33 +1,33 @@
 ---
-title: Designing a calmer blog front page
+title: 更安静的博客首页设计
 date: 2026-01-12 18:29:36
 categories:
-  - Design
+  - 设计
 tags:
-  - hexo
-  - editorial
-excerpt: Reworking a default Hexo homepage into a quieter editorial layout with mixed language typography, fixed-side scrolling, and curated cover panels.
+  - 建站
+  - 编辑排版
+excerpt: 将默认的 Hexo 首页改造成更安静的编辑型布局，加入混排文字、固定侧栏滚动与封面式模块。
 cover: editorial-grid
 ---
-This note records the first meaningful redesign of the blog homepage.
+这篇文章记录了博客首页第一次真正成型的改版。
 
-Instead of starting with a giant hero block, I wanted the front page to feel more like a magazine index: quieter, denser, and more intentional. The goal was not to imitate an award-site layout one-to-one, but to borrow its editorial confidence and spatial rhythm.
+我不想让首页从一个巨大的 Hero 开始，而是希望它更像杂志目录页，安静一些、密度更高一些，也更有选择感。目标并不是机械模仿 Awwwards 风格，而是借用那种更偏编辑化的节奏与气质。
 
-## Direction
+## 方向
 
-- Keep the title smaller and calmer.
-- Mix Chinese and English in a natural way.
-- Use cover-like panels instead of a single dominant banner.
-- Let the reading list scroll while the filter area stays fixed.
+- 让标题更收敛，而不是过度夸张。
+- 自然地混用中英文排版。
+- 用封面式模块替代单一的大横幅。
+- 让文章列表滚动，同时保留固定筛选区。
 
-## What changed
+## 这次改了什么
 
-The homepage now opens with `chen's blog`, a short bilingual introduction, and a cover section that acts like a visual table of contents. Below that, the layout shifts into a split-screen reading index: the left side explains the page and holds the filters, while the right side becomes the main stream of articles.
+首页现在以 `chen's blog` 开场，配合一段简短说明和封面模块，把首页做成类似视觉目录。往下则切换成分屏式阅读索引，左侧负责说明和筛选，右侧作为主要文章流。
 
-## Why it feels better
+## 为什么这样更好
 
-Many default blog themes are usable but too generic. &#26356;&#32534;&#36753;&#21270;&#30340;&#24067;&#23616; makes even a small set of posts feel chosen instead of merely listed.
+大多数默认博客主题并不是不能用，而是太像模板。更偏编辑化的布局，会让哪怕只有少量文章的网站，也显得是被认真编排过的，而不只是简单罗列。
 
-## Next
+## 下一步
 
-The next step is to add real cover images, richer post metadata, and a stronger archive structure so the site can keep this mood as content grows.
+接下来还会继续补真实封面图、更完整的文章信息，以及更强的归档结构，让整站在文章变多之后仍然保持这个视觉气质。

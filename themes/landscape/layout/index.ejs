@@ -35,7 +35,7 @@ function coverName(post) {
 }
 %>
 
-<section class="masthead">
+<section class="masthead reveal-item">
   <div class="masthead__title">
     <p class="eyebrow">chen 的笔记 / 个人记录</p>
     <h1>chen's blog</h1>
@@ -47,18 +47,18 @@ function coverName(post) {
 </section>
 
 <section class="cover-grid">
-  <article class="cover-card cover-card--intro">
+  <article class="cover-card reveal-item">
     <p class="cover-card__kicker">编辑说明</p>
     <h2>减少大横幅，保留氛围感。</h2>
     <p>首屏不再使用夸张的大 Hero，而是更接近作品封面与独立杂志首页的组织方式，并保留一点中英混排的节奏感。</p>
   </article>
 
-  <article class="cover-card cover-card--featured">
+  <article class="cover-card cover-card--featured reveal-item">
     <p class="cover-card__kicker">最新封面</p>
     <% if (featuredPost) { %>
       <div class="cover-art cover-art--<%= coverName(featuredPost) %>"></div>
       <h2><a href="<%= url_for(featuredPost.path) %>"><%= featuredPost.title %></a></h2>
-      <p><%= truncate(strip_html(featuredPost.excerpt || featuredPost.content || ''), {length: 120}) %></p>
+      <p><%= truncate(strip_html(featuredPost.excerpt || featuredPost.content || ''), { length: 120 }) %></p>
       <div class="cover-card__meta">
         <time datetime="<%= date_xml(featuredPost.date) %>"><%= date(featuredPost.date, 'YYYY.MM.DD') %></time>
         <span><%= categoryItems(featuredPost)[0].name %></span>
@@ -69,7 +69,7 @@ function coverName(post) {
     <% } %>
   </article>
 
-  <article class="cover-card cover-card--stack">
+  <article class="cover-card cover-card--stack reveal-item">
     <p class="cover-card__kicker">站点概览</p>
     <div class="mini-stack">
       <div>
@@ -90,7 +90,7 @@ function coverName(post) {
 
 <section class="split-section" id="posts">
   <aside class="split-section__sidebar">
-    <div class="sticky-panel">
+    <div class="sticky-panel reveal-item">
       <p class="eyebrow">滚动索引</p>
       <h2>精选文章 / 分类筛选</h2>
       <p class="sticky-panel__copy">左侧保持固定，右侧持续滚动浏览文章。你可以在当前页面直接筛选分类，而不会打断阅读节奏。</p>
@@ -108,7 +108,7 @@ function coverName(post) {
       var categories = categoryItems(post);
       var categorySlugs = categories.map(function(category) { return category.slug; }).join(' ');
     %>
-      <article class="post-panel" data-categories="<%= categorySlugs %>">
+      <article class="post-panel reveal-item" data-categories="<%= categorySlugs %>" style="--reveal-delay: <%= index * 90 %>ms">
         <div class="post-panel__topline">
           <span><%= String(index + 1).padStart(2, '0') %></span>
           <time datetime="<%= date_xml(post.date) %>"><%= date(post.date, 'YYYY.MM.DD') %></time>
@@ -123,7 +123,7 @@ function coverName(post) {
               <% }) %>
             </div>
           </div>
-          <p><%= truncate(strip_html(post.excerpt || post.content || ''), {length: 180}) %></p>
+          <p><%= truncate(strip_html(post.excerpt || post.content || ''), { length: 180 }) %></p>
           <a class="post-card__link" href="<%= url_for(post.path) %>">阅读全文</a>
         </div>
       </article>

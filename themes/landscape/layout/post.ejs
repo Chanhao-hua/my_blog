@@ -1,20 +1,54 @@
-<article class="article-view">
-  <div class="article-view__header">
-    <p class="eyebrow">文章</p>
-    <h1><%= page.title %></h1>
-    <div class="article-view__meta">
-      <time datetime="<%= date_xml(page.date) %>"><%= date(page.date, 'YYYY.MM.DD') %></time>
-      <% if (page.updated && page.updated.valueOf() !== page.date.valueOf()) { %>
-        <span>更新于 <%= date(page.updated, 'YYYY.MM.DD') %></span>
-      <% } %>
+<%
+function postCoverName(page) {
+  return page.cover || 'editorial-grid';
+}
+function postCategoryNames(page) {
+  if (page.categories && page.categories.data && page.categories.data.length) {
+    return page.categories.data.map(function(category) { return category.name; });
+  }
+  return ['未分类'];
+}
+%>
+
+<article class="article-editorial">
+  <section class="article-hero reveal-item">
+    <div class="article-hero__main">
+      <p class="eyebrow">文章</p>
+      <h1><%= page.title %></h1>
+      <p class="article-hero__lead"><%= page.excerpt ? strip_html(page.excerpt) : '一篇持续更新的博客文章。' %></p>
     </div>
-  </div>
 
-  <div class="article-view__body">
-    <%- page.content %>
-  </div>
+    <aside class="article-hero__aside">
+      <div class="article-sidecard">
+        <div class="cover-art cover-art--<%= postCoverName(page) %>"></div>
+        <div class="article-sidecard__meta">
+          <span>发布时间</span>
+          <strong><%= date(page.date, 'YYYY.MM.DD') %></strong>
+        </div>
+        <% if (page.updated && page.updated.valueOf() !== page.date.valueOf()) { %>
+          <div class="article-sidecard__meta">
+            <span>最近更新</span>
+            <strong><%= date(page.updated, 'YYYY.MM.DD') %></strong>
+          </div>
+        <% } %>
+        <div class="article-sidecard__tags">
+          <% postCategoryNames(page).forEach(function(name) { %>
+            <span><%= name %></span>
+          <% }) %>
+        </div>
+      </div>
+    </aside>
+  </section>
 
-  <div class="article-view__back">
-    <a class="button button--ghost" href="<%= url_for('/') %>">返回首页</a>
-  </div>
+  <section class="article-stage">
+    <div class="article-view article-view--editorial reveal-item">
+      <div class="article-view__body">
+        <%- page.content %>
+      </div>
+
+      <div class="article-view__back">
+        <a class="button button--ghost" href="<%= url_for('/') %>">返回首页</a>
+      </div>
+    </div>
+  </section>
 </article>

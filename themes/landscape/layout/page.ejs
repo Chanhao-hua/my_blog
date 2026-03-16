@@ -1,9 +1,17 @@
-<article class="article-view">
-  <div class="article-view__header">
-    <p class="eyebrow">页面</p>
-    <h1><%= page.title %></h1>
-  </div>
-  <div class="article-view__body">
-    <%- page.content %>
-  </div>
+<article class="article-editorial">
+  <section class="article-hero reveal-item">
+    <div class="article-hero__main">
+      <p class="eyebrow">页面</p>
+      <h1><%= page.title %></h1>
+      <p class="article-hero__lead">静态页面也沿用同一套编辑视觉，让整个站点在浏览时保持一致的节奏与气质。</p>
+    </div>
+  </section>
+
+  <section class="article-stage">
+    <div class="article-view article-view--editorial reveal-item">
+      <div class="article-view__body">
+        <%- page.content %>
+      </div>
+    </div>
+  </section>
 </article>

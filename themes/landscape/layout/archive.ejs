@@ -1,18 +1,48 @@
-<section class="archive-view">
-  <div class="section-heading">
+<%
+function archiveCoverName(post) {
+  return post.cover || 'editorial-grid';
+}
+function archiveCategoryName(post) {
+  if (post.categories && post.categories.data && post.categories.data.length) {
+    return post.categories.data[0].name;
+  }
+  return '未分类';
+}
+%>
+
+<section class="editorial-hero reveal-item">
+  <div class="editorial-hero__main">
     <p class="eyebrow">归档</p>
     <h1><%= page.title || '全部文章' %></h1>
+    <p class="editorial-hero__lead">按时间整理所有公开文章，让归档页也像一本可浏览的目录，而不是简单的文章清单。</p>
   </div>
+  <div class="editorial-hero__side">
+    <div class="editorial-stat">
+      <span class="editorial-stat__label">文章数量</span>
+      <strong><%= page.posts.length %></strong>
+    </div>
+    <div class="editorial-stat">
+      <span class="editorial-stat__label">最早年份</span>
+      <strong><%= site.posts.length ? date(site.posts.last().date, 'YYYY') : '现在' %></strong>
+    </div>
+  </div>
+</section>
 
-  <div class="archive-list">
+<section class="archive-stage">
+  <div class="archive-list archive-list--editorial">
     <% page.posts.each(function(post, index){ %>
-      <article class="archive-item">
-        <span class="archive-item__index"><%= String(index + 1).padStart(2, '0') %></span>
+      <article class="archive-item archive-item--editorial reveal-item" style="--reveal-delay: <%= index * 70 %>ms">
+        <div class="archive-item__index"><%= String(index + 1).padStart(2, '0') %></div>
+        <div class="archive-item__cover cover-art cover-art--<%= archiveCoverName(post) %>"></div>
         <div class="archive-item__content">
+          <div class="archive-item__meta">
+            <span><%= archiveCategoryName(post) %></span>
+            <time datetime="<%= date_xml(post.date) %>"><%= date(post.date, 'YYYY.MM.DD') %></time>
+          </div>
           <h2><a href="<%= url_for(post.path) %>"><%= post.title %></a></h2>
-          <p><%= truncate(strip_html(post.excerpt || post.content || ''), {length: 160}) %></p>
+          <p><%= truncate(strip_html(post.excerpt || post.content || ''), {length: 170}) %></p>
+          <a class="post-card__link" href="<%= url_for(post.path) %>">进入文章</a>
         </div>
-        <time datetime="<%= date_xml(post.date) %>"><%= date(post.date, 'YYYY.MM.DD') %></time>
       </article>
     <% }) %>
   </div>

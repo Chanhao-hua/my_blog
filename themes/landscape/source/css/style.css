@@ -187,6 +187,166 @@ img {
   margin: 12px 0 72px;
 }
 
+.editorial-hero,
+.article-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+  gap: 24px;
+  align-items: end;
+  margin: 12px 0 34px;
+}
+
+.editorial-hero__main,
+.article-hero__main,
+.editorial-hero__side,
+.article-sidecard,
+.article-view--editorial {
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: linear-gradient(180deg, rgba(255, 248, 235, 0.08), rgba(255, 248, 235, 0.04));
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow);
+}
+
+.editorial-hero__main,
+.article-hero__main {
+  padding: 28px;
+}
+
+.editorial-hero__main h1,
+.article-hero__main h1 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(3rem, 7vw, 6rem);
+  font-weight: 400;
+  line-height: 0.94;
+  letter-spacing: -0.04em;
+}
+
+.editorial-hero__lead,
+.article-hero__lead {
+  max-width: 42rem;
+  margin: 20px 0 0;
+  color: var(--muted);
+  line-height: 1.85;
+  font-size: 1.02rem;
+}
+
+.editorial-hero__side {
+  display: grid;
+  gap: 16px;
+}
+
+.editorial-stat,
+.article-sidecard__meta {
+  padding: 22px 24px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(255, 248, 235, 0.08), rgba(255, 248, 235, 0.03));
+}
+
+.editorial-stat__label,
+.article-sidecard__meta span,
+.archive-item__meta,
+.article-sidecard__tags span {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.editorial-stat strong,
+.article-sidecard__meta strong {
+  display: block;
+  margin-top: 10px;
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.archive-stage,
+.article-stage {
+  padding-bottom: 72px;
+}
+
+.archive-list--editorial {
+  gap: 22px;
+}
+
+.archive-item--editorial {
+  grid-template-columns: 64px minmax(180px, 0.55fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
+.archive-item__cover {
+  min-height: 190px;
+  margin-bottom: 0;
+}
+
+.archive-item__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.archive-item--editorial h2 {
+  margin-top: 20px;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.article-editorial {
+  padding-bottom: 72px;
+}
+
+.article-sidecard {
+  padding: 20px;
+}
+
+.article-sidecard .cover-art {
+  min-height: 220px;
+}
+
+.article-sidecard__meta + .article-sidecard__meta {
+  margin-top: 12px;
+}
+
+.article-sidecard__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.article-sidecard__tags span {
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+.article-view--editorial {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 36px;
+}
+
+.article-view--editorial .article-view__body > :first-child {
+  margin-top: 0;
+}
+
+.article-view--editorial .article-view__body p,
+.article-view--editorial .article-view__body li {
+  font-size: 1.02rem;
+}
+
+.article-view--editorial .article-view__body h2 {
+  margin-top: 2.4em;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.article-view--editorial .article-view__body h3 {
+  margin-top: 1.8em;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+}
+
 .reveal-item {
   opacity: 0;
   transform: translateY(28px);
@@ -346,6 +506,80 @@ img {
     linear-gradient(90deg, rgba(255, 107, 44, 0.4), rgba(244, 182, 124, 0.12));
   clip-path: polygon(0 78%, 15% 52%, 31% 61%, 46% 35%, 60% 44%, 74% 20%, 100% 0, 100% 100%, 0 100%);
   border-radius: 14px;
+}
+
+.cover-art--soft-glow::before {
+  background:
+    radial-gradient(circle at 22% 24%, rgba(255, 107, 44, 0.34), transparent 24%),
+    radial-gradient(circle at 74% 34%, rgba(244, 182, 124, 0.24), transparent 28%),
+    radial-gradient(circle at 58% 78%, rgba(255, 248, 235, 0.1), transparent 24%);
+}
+
+.cover-art--soft-glow::after {
+  inset: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 248, 235, 0.16);
+  background:
+    linear-gradient(135deg, rgba(255, 248, 235, 0.08), transparent 58%),
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.08), transparent 36%);
+}
+
+.cover-art--paper-cut::before {
+  background:
+    linear-gradient(155deg, rgba(255, 248, 235, 0.09), transparent 58%),
+    linear-gradient(0deg, rgba(255, 248, 235, 0.03), rgba(255, 248, 235, 0.03));
+}
+
+.cover-art--paper-cut::after {
+  inset: 16px;
+  border-radius: 16px;
+  background:
+    linear-gradient(125deg, rgba(255, 107, 44, 0.22), transparent 46%),
+    linear-gradient(305deg, rgba(244, 182, 124, 0.2), transparent 44%);
+  box-shadow:
+    0 0 0 1px rgba(255, 248, 235, 0.14),
+    20px 20px 0 -10px rgba(255, 248, 235, 0.08),
+    -18px 16px 0 -12px rgba(255, 248, 235, 0.06);
+}
+
+.cover-art--mono-wave::before {
+  background:
+    radial-gradient(circle at 50% 120%, rgba(255, 248, 235, 0.2), transparent 44%),
+    repeating-radial-gradient(
+      circle at 50% 120%,
+      rgba(255, 248, 235, 0.08) 0,
+      rgba(255, 248, 235, 0.08) 10px,
+      transparent 10px,
+      transparent 24px
+    );
+}
+
+.cover-art--mono-wave::after {
+  inset: auto 18px 18px 18px;
+  top: 18px;
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(255, 107, 44, 0.12), transparent 42%),
+    linear-gradient(90deg, rgba(255, 248, 235, 0.12), rgba(255, 248, 235, 0.02));
+  clip-path: polygon(0 100%, 0 54%, 12% 58%, 24% 46%, 36% 52%, 48% 34%, 61% 44%, 74% 24%, 86% 36%, 100% 16%, 100% 100%);
+}
+
+.cover-art--frame-stack::before {
+  background:
+    linear-gradient(135deg, rgba(255, 248, 235, 0.05), transparent 60%),
+    linear-gradient(315deg, rgba(255, 107, 44, 0.14), transparent 50%);
+}
+
+.cover-art--frame-stack::after {
+  inset: 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 248, 235, 0.18);
+  box-shadow:
+    12px -12px 0 -2px rgba(255, 248, 235, 0.08),
+    24px -24px 0 -8px rgba(255, 248, 235, 0.05);
+  background:
+    linear-gradient(180deg, rgba(255, 248, 235, 0.06), transparent 70%),
+    radial-gradient(circle at 80% 22%, rgba(244, 182, 124, 0.24), transparent 24%);
 }
 
 .cover-card__kicker,
@@ -622,6 +856,8 @@ img {
 }
 
 @media (max-width: 1024px) {
+  .editorial-hero,
+  .article-hero,
   .masthead,
   .cover-grid,
   .split-section {
@@ -655,7 +891,8 @@ img {
 
   .post-panel__topline,
   .post-panel__header,
-  .archive-item {
+  .archive-item,
+  .archive-item--editorial {
     display: grid;
     grid-template-columns: 1fr;
   }
@@ -664,7 +901,11 @@ img {
     padding: 20px;
   }
 
-  .article-view {
+  .article-view,
+  .article-view--editorial,
+  .editorial-hero__main,
+  .article-hero__main,
+  .article-sidecard {
     padding: 22px;
   }
 }

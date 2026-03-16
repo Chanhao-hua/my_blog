@@ -1,132 +1,133 @@
-<%
-var posts = page.posts;
-function slugifyLabel(value) {
-  return String(value || 'uncategorized').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'uncategorized';
-}
-function categoryItems(post) {
-  var items = [];
-  if (post.categories && post.categories.data && post.categories.data.length) {
-    post.categories.data.forEach(function(category) {
-      items.push({
-        name: category.name,
-        slug: category.slug || slugifyLabel(category.name)
-      });
-    });
-  }
-  if (!items.length) {
-    items.push({ name: '未分类', slug: 'uncategorized' });
-  }
-  return items;
-}
-var filters = [{ label: '全部', slug: 'all' }];
-var seenFilters = { all: true };
-posts.each(function(post) {
-  categoryItems(post).forEach(function(category) {
-    if (!seenFilters[category.slug]) {
-      seenFilters[category.slug] = true;
-      filters.push({ label: category.name, slug: category.slug });
-    }
-  });
-});
-var featuredPost = posts.length ? posts.data[0] : null;
-var secondaryPost = posts.length > 1 ? posts.data[1] : featuredPost;
-function coverName(post) {
+<% var posts=page.posts; function slugifyLabel(value) { return String(value || 'uncategorized'
+  ).toLowerCase().replace(/[^a-z0-9]+/g, '-' ).replace(/^-+|-+$/g, '' ) || 'uncategorized' ; } function
+  categoryItems(post) { var items=[]; if (post.categories && post.categories.data && post.categories.data.length) {
+  post.categories.data.forEach(function(category) { items.push({ name: category.name, slug: category.slug ||
+  slugifyLabel(category.name) }); }); } if (!items.length) { items.push({ name: '未分类' , slug: 'uncategorized' }); }
+  return items; } var filters=[{ label: '全部' , slug: 'all' }]; var seenFilters={ all: true }; posts.each(function(post)
+  { categoryItems(post).forEach(function(category) { if (!seenFilters[category.slug]) { seenFilters[category.slug]=true;
+  filters.push({ label: category.name, slug: category.slug }); } }); }); var featuredPost=posts.length ? posts.data[0] :
+  null; var secondaryPost=posts.length> 1 ? posts.data[1] : featuredPost;
+  function coverName(post) {
   return post.cover || 'editorial-grid';
-}
-%>
+  }
+  %>
 
-<section class="masthead reveal-item">
-  <div class="masthead__title">
-    <p class="eyebrow">chen 的笔记 / 个人记录</p>
-    <h1>chen's blog</h1>
-  </div>
-  <div class="masthead__copy">
-    <p class="lede">关于设计、开发、观察和未完成想法的记录，让首页更像一本编辑型目录，而不是普通博客封面。</p>
-    <p class="subcopy">用更安静的排版节奏、封面式模块和滚动阅读索引来组织内容。</p>
-  </div>
-</section>
-
-<section class="cover-grid">
-  <article class="cover-card reveal-item">
-    <p class="cover-card__kicker">编辑说明</p>
-    <h2>减少大横幅，保留氛围感。</h2>
-    <p>首屏不再使用夸张的大 Hero，而是更接近作品封面与独立杂志首页的组织方式，并保留一点中英混排的节奏感。</p>
-  </article>
-
-  <article class="cover-card cover-card--featured reveal-item">
-    <p class="cover-card__kicker">最新封面</p>
-    <% if (featuredPost) { %>
-      <div class="cover-art cover-art--<%= coverName(featuredPost) %>"></div>
-      <h2><a href="<%= url_for(featuredPost.path) %>"><%= featuredPost.title %></a></h2>
-      <p><%= truncate(strip_html(featuredPost.excerpt || featuredPost.content || ''), { length: 120 }) %></p>
-      <div class="cover-card__meta">
-        <time datetime="<%= date_xml(featuredPost.date) %>"><%= date(featuredPost.date, 'YYYY.MM.DD') %></time>
-        <span><%= categoryItems(featuredPost)[0].name %></span>
-      </div>
-    <% } else { %>
-      <h2>等待第一篇文章</h2>
-      <p>发布你的第一篇文章后，这里会自动成为网站首页的动态封面区域。</p>
-    <% } %>
-  </article>
-
-  <article class="cover-card cover-card--stack reveal-item">
-    <p class="cover-card__kicker">站点概览</p>
-    <div class="mini-stack">
-      <div>
-        <span class="mini-stack__label">归档开始于</span>
-        <strong><%= site.posts.length ? date(site.posts.first().date, 'YYYY') : '现在' %></strong>
-      </div>
-      <div>
-        <span class="mini-stack__label">文章数量</span>
-        <strong><%= site.posts.length %></strong>
-      </div>
-      <div>
-        <span class="mini-stack__label">下一篇推荐</span>
-        <strong><%= secondaryPost ? secondaryPost.title : '即将更新' %></strong>
-      </div>
+  <section class="masthead reveal-item">
+    <div class="masthead__title">
+      <p class="eyebrow">chen 的笔记 / 个人记录</p>
+      <h1>chen's blog</h1>
     </div>
-  </article>
-</section>
-
-<section class="split-section" id="posts">
-  <aside class="split-section__sidebar">
-    <div class="sticky-panel reveal-item">
-      <p class="eyebrow">滚动索引</p>
-      <h2>精选文章 / 分类筛选</h2>
-      <p class="sticky-panel__copy">左侧保持固定，右侧持续滚动浏览文章。你可以在当前页面直接筛选分类，而不会打断阅读节奏。</p>
-      <div class="filter-row" aria-label="分类筛选">
-        <% filters.forEach(function(filter) { %>
-          <button class="filter-chip<%= filter.slug === 'all' ? ' is-active' : '' %>" type="button" data-filter="<%= filter.slug %>"><%= filter.label %></button>
-        <% }) %>
-      </div>
-      <a class="button button--ghost" href="<%= url_for('/archives/') %>">查看归档</a>
+    <div class="masthead__copy">
+      <p class="lede">关于设计、开发、观察和未完成想法的记录。</p>
+      <p class="subcopy">用更安静的节奏、氛围以及知识来组织想法。</p>
     </div>
-  </aside>
+  </section>
 
-  <div class="split-section__content">
-    <% posts.each(function(post, index) {
-      var categories = categoryItems(post);
-      var categorySlugs = categories.map(function(category) { return category.slug; }).join(' ');
+  <section class="cover-grid">
+    <article class="cover-card reveal-item">
+      <p class="cover-card__kicker">编辑说明</p>
+      <h2>减少大横幅，保留氛围感。</h2>
+      <p>首屏不再使用夸张的大 Hero，而是更接近作品封面与独立杂志首页的组织方式，并保留一点中英混排的节奏感。</p>
+    </article>
+
+    <article class="cover-card cover-card--featured reveal-item">
+      <p class="cover-card__kicker">最新封面</p>
+      <% if (featuredPost) { %>
+        <div class="cover-art cover-art--<%= coverName(featuredPost) %>"></div>
+        <h2><a href="<%= url_for(featuredPost.path) %>">
+            <%= featuredPost.title %>
+          </a></h2>
+        <p>
+          <%= truncate(strip_html(featuredPost.excerpt || featuredPost.content || '' ), { length: 120 }) %>
+        </p>
+        <div class="cover-card__meta">
+          <time datetime="<%= date_xml(featuredPost.date) %>">
+            <%= date(featuredPost.date, 'YYYY.MM.DD' ) %>
+          </time>
+          <span>
+            <%= categoryItems(featuredPost)[0].name %>
+          </span>
+        </div>
+        <% } else { %>
+          <h2>等待第一篇文章</h2>
+          <p>发布你的第一篇文章后，这里会自动成为网站首页的动态封面区域。</p>
+          <% } %>
+    </article>
+
+    <article class="cover-card cover-card--stack reveal-item">
+      <p class="cover-card__kicker">站点概览</p>
+      <div class="mini-stack">
+        <div>
+          <span class="mini-stack__label">归档开始于</span>
+          <strong>
+            <%= site.posts.length ? date(site.posts.first().date, 'YYYY' ) : '现在' %>
+          </strong>
+        </div>
+        <div>
+          <span class="mini-stack__label">文章数量</span>
+          <strong>
+            <%= site.posts.length %>
+          </strong>
+        </div>
+        <div>
+          <span class="mini-stack__label">下一篇推荐</span>
+          <strong>
+            <%= secondaryPost ? secondaryPost.title : '即将更新' %>
+          </strong>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="split-section" id="posts">
+    <aside class="split-section__sidebar">
+      <div class="sticky-panel reveal-item">
+        <p class="eyebrow">滚动索引</p>
+        <h2>精选文章 / 分类筛选</h2>
+        <p class="sticky-panel__copy">左侧保持固定，右侧持续滚动浏览文章。你可以在当前页面直接筛选分类，而不会打断阅读节奏。</p>
+        <div class="filter-row" aria-label="分类筛选">
+          <% filters.forEach(function(filter) { %>
+            <button class="filter-chip<%= filter.slug === 'all' ? ' is-active' : '' %>" type="button"
+              data-filter="<%= filter.slug %>">
+              <%= filter.label %>
+            </button>
+            <% }) %>
+        </div>
+        <a class="button button--ghost" href="<%= url_for('/archives/') %>">查看归档</a>
+      </div>
+    </aside>
+
+    <div class="split-section__content">
+      <% posts.each(function(post, index) { var categories=categoryItems(post); var
+        categorySlugs=categories.map(function(category) { return category.slug; }).join(' ');
     %>
       <article class="post-panel reveal-item" data-categories="<%= categorySlugs %>" style="--reveal-delay: <%= index * 90 %>ms">
         <div class="post-panel__topline">
-          <span><%= String(index + 1).padStart(2, '0') %></span>
-          <time datetime="<%= date_xml(post.date) %>"><%= date(post.date, 'YYYY.MM.DD') %></time>
+          <span><%= String(index + 1).padStart(2, ' 0') %></span>
+        <time datetime="<%= date_xml(post.date) %>">
+          <%= date(post.date, 'YYYY.MM.DD' ) %>
+        </time>
+    </div>
+    <div class="post-panel__body">
+      <div class="post-panel__cover cover-art cover-art--<%= coverName(post) %>"></div>
+      <div class="post-panel__header">
+        <h3><a href="<%= url_for(post.path) %>">
+            <%= post.title %>
+          </a></h3>
+        <div class="post-panel__tags">
+          <% categories.forEach(function(category) { %>
+            <span>
+              <%= category.name %>
+            </span>
+            <% }) %>
         </div>
-        <div class="post-panel__body">
-          <div class="post-panel__cover cover-art cover-art--<%= coverName(post) %>"></div>
-          <div class="post-panel__header">
-            <h3><a href="<%= url_for(post.path) %>"><%= post.title %></a></h3>
-            <div class="post-panel__tags">
-              <% categories.forEach(function(category) { %>
-                <span><%= category.name %></span>
-              <% }) %>
-            </div>
-          </div>
-          <p><%= truncate(strip_html(post.excerpt || post.content || ''), { length: 180 }) %></p>
-          <a class="post-card__link" href="<%= url_for(post.path) %>">阅读全文</a>
-        </div>
-      </article>
+      </div>
+      <p>
+        <%= truncate(strip_html(post.excerpt || post.content || '' ), { length: 180 }) %>
+      </p>
+      <a class="post-card__link" href="<%= url_for(post.path) %>">阅读全文</a>
+    </div>
+    </article>
     <% }) %>
-  </div>
-</section>
+      </div>
+  </section>
